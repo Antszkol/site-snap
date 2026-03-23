@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SiteSnap — Strony Internetowe w 7 Dni</title>
+  <meta name="description" content="SiteSnap buduje nowoczesne strony internetowe szybko i profesjonalnie. Landing page, strony wizytówki, sklepy online. Realizacja od 7 dni.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --c-bg:          #00081B;
+      --c-bg2:         #000D2E;
+      --c-bg3:         #001240;
+      --c-brand:       #002C98;
+      --c-brand-mid:   #0047D4;
+      --c-brand-lite:  #1A5FE8;
+      --c-action:      #65DBFF;
+      --c-action-dim:  #3CC0E8;
+      --c-action-glow: rgba(101,219,255,.28);
+      --c-text:        #EEEEEE;
+      --c-muted:       #8899BB;
+      --c-border:      rgba(0,44,152,.45);
+      --c-border-bright: rgba(101,219,255,.22);
+      --c-card:        rgba(0,24,82,.48);
+
+      --f-head: 'Sora', system-ui, sans-serif;
+      --f-body: 'Inter', system-ui, sans-serif;
+
+      --t-xs:   0.75rem;
+      --t-sm:   0.875rem;
+      --t-base: 1rem;
+      --t-lg:   1.125rem;
+      --t-xl:   1.25rem;
+      --t-2xl:  1.5rem;
+      --t-3xl:  1.875rem;
+      --t-4xl:  2.25rem;
+      --t-5xl:  3rem;
+      --t-6xl:  3.75rem;
+      --t-7xl:  4.5rem;
+
+      --sp-xs: 0.25rem; --sp-sm: 0.5rem; --sp-md: 1rem;
+      --sp-lg: 2rem;    --sp-xl: 4rem;   --sp-2xl: 8rem;
+
+      --r-sm: 6px; --r-md: 12px; --r-lg: 20px;
+      --r-xl: 28px; --r-full: 9999px;
+
+      --shadow-action: 0 0 28px rgba(101,219,255,.38), 0 4px 16px rgba(101,219,255,.2);
+      --shadow-card:   0 4px 32px rgba(0,0,0,.4);
+      --t: 0.25s cubic-bezier(.16,1,.3,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--c-bg);
+      color: var(--c-text);
+      font-family: var(--f-body);
+      font-size: var(--t-base);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    h1,h2,h3,h4 { font-family: var(--f-head); line-height: 1.12; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--sp-lg); }
+
+    /* ─── UTILITIES ─────────────────────────────────────── */
+    .text-action { color: var(--c-action); }
+    .text-muted  { color: var(--c-muted); }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--r-full);
+      border: 1px solid var(--c-border-bright);
+      background: rgba(101,219,255,.06);
+      color: var(--c-action);
+      font-family: var(--f-head); font-size: var(--t-xs);
+      font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    }
+    .badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--c-action); box-shadow: 0 0 6px var(--c-action);
+      animation: blink 2.2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.35} }
+
+    .section-label {
+      font-family: var(--f-head); font-size: var(--t-xs); font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--c-action);
+      margin-bottom: var(--sp-sm);
+    }
+
+    /* ─── BUTTONS ──────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: 14px 30px; border-radius: var(--r-full);
+      font-family: var(--f-head); font-size: var(--t-base); font-weight: 700;
+      cursor: pointer; border: none; transition: var(--t); position: relative; overflow: hidden;
+    }
+    .btn-primary {
+      background: var(--c-action); color: var(--c-bg);
+      box-shadow: var(--shadow-action);
+    }
+    .btn-primary::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.22), transparent 55%);
+      opacity: 0; transition: var(--t);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.045);
+      box-shadow: 0 0 44px rgba(101,219,255,.52), 0 8px 28px rgba(101,219,255,.3);
+    }
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-outline {
+      background: transparent; color: var(--c-text);
+      border: 1.5px solid rgba(238,238,238,.22);
+    }
+    .btn-outline:hover { border-color: var(--c-action); color: var(--c-action); transform: translateY(-2px); }
+
+    /* ─── SCROLL REVEAL ────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(26px);
+      transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity:1; transform:none; transition:none; } }
+
+    /* ─── NAVIGATION ───────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100; padding: 22px 0; transition: all .35s ease;
+    }
+    .nav.scrolled {
+      background: rgba(0,8,27,.9); backdrop-filter: blur(18px);
+      padding: 14px 0; border-bottom: 1px solid var(--c-border);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo {
+      display: flex; align-items: center; gap: .55rem;
+      font-family: var(--f-head); font-size: var(--t-xl); font-weight: 800;
+    }
+    .nav-logo-icon {
+      width: 34px; height: 34px; background: var(--c-action);
+      border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 14px rgba(101,219,255,.5); flex-shrink: 0;
+    }
+    .nav-logo-text { color: var(--c-text); }
+    .nav-logo-text span { color: var(--c-action); }
+    .nav-links { display: flex; align-items: center; gap: var(--sp-lg); list-style: none; }
+    .nav-links a {
+      font-family: var(--f-head); font-size: var(--t-sm); font-weight: 600;
+      color: rgba(238,238,238,.65); transition: color var(--t);
+    }
+    .nav-links a:hover { color: var(--c-action); }
+    .nav-cta { margin-left: var(--sp-md); }
+    .nav-toggle {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--c-text); border-radius: 2px; transition: var(--t); }
+    .nav-mobile {
+      display: none; flex-direction: column; gap: var(--sp-md);
+      padding: var(--sp-lg) 0; border-top: 1px solid var(--c-border); margin-top: var(--sp-md);
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-family: var(--f-head); font-weight: 600; color: rgba(238,238,238,.8); padding: 8px 0; }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+    }
+
+    /* ─── HERO ─────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 120px 0 80px; position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,71,212,.28) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,71,212,.28) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 100% 100% at 50% 0%, black 60%, transparent 100%);
+    }
+    .hero-orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(90px); pointer-events: none;
+    }
+    .hero-orb-1 {
+      width: 650px; height: 650px;
+      background: radial-gradient(circle, rgba(0,44,152,.55) 0%, transparent 70%);
+      top: -140px; left: -120px;
+      animation: orbFloat1 15s ease-in-out infinite;
+    }
+    .hero-orb-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(101,219,255,.1) 0%, transparent 70%);
+      bottom: -60px; right: -60px;
+      animation: orbFloat2 19s ease-in-out infinite;
+    }
+    @keyframes orbFloat1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(45px,65px)} }
+    @keyframes orbFloat2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-55px,-45px)} }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--sp-2xl); align-items: center;
+    }
+    .hero-badge { margin-bottom: var(--sp-lg); }
+    .hero-headline {
+      font-size: clamp(var(--t-4xl), 5.5vw, var(--t-7xl));
+      font-weight: 800; letter-spacing: -.025em; margin-bottom: var(--sp-lg);
+    }
+    .hero-headline .line { display: block; }
+    .hero-headline .hl-action {
+      color: var(--c-action);
+      text-shadow: 0 0 50px rgba(101,219,255,.38);
+    }
+    .hero-sub {
+      font-size: var(--t-lg); color: var(--c-muted);
+      max-width: 480px; margin-bottom: var(--sp-xl); line-height: 1.75;
+    }
+    .hero-actions { display: flex; gap: var(--sp-md); align-items: center; flex-wrap: wrap; }
+
+    /* Mockup */
+    .hero-right { position: relative; }
+    .mockup-wrap { position: relative; width: 100%; aspect-ratio: 0.95; }
+    .mockup-main {
+      position: absolute; inset: 0;
+      background: linear-gradient(145deg, rgba(0,20,72,.92), rgba(0,44,152,.18));
+      border: 1px solid rgba(0,44,152,.45);
+      border-radius: var(--r-xl); overflow: hidden; padding: 22px;
+    }
+    .mockup-browser-bar {
+      display: flex; align-items: center; gap: 6px; margin-bottom: 16px;
+    }
+    .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .mockup-dot:nth-child(1) { background:#FF5F57 }
+    .mockup-dot:nth-child(2) { background:#FEBC2E }
+    .mockup-dot:nth-child(3) { background:#28C840 }
+    .mockup-url {
+      flex: 1; background: rgba(0,44,152,.28); border-radius: var(--r-sm);
+      height: 22px; margin-left: 8px;
+      display: flex; align-items: center; padding: 0 10px; gap: 6px;
+    }
+    .mockup-url-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c-action); box-shadow: 0 0 6px var(--c-action); }
+    .mockup-url-bar { height: 4px; width: 55%; background: rgba(101,219,255,.18); border-radius: 2px; }
+    .mockup-screen-hero {
+      height: 88px;
+      background: linear-gradient(135deg, rgba(0,44,152,.38), rgba(101,219,255,.04));
+      border-radius: var(--r-md); margin-bottom: 12px;
+      display: flex; flex-direction: column; justify-content: center; padding: 14px;
+    }
+    .mock-line { height: 6px; border-radius: 3px; background: rgba(238,238,238,.28); margin-bottom: 7px; }
+    .mock-line.c { background: rgba(101,219,255,.5); width: 62%; }
+    .mock-line.s { width: 42%; opacity: .6; }
+    .mock-btn { width: 76px; height: 22px; border-radius: 20px; background: var(--c-action); margin-top: 6px; box-shadow: 0 0 10px rgba(101,219,255,.4); }
+    .mock-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 10px; }
+    .mock-card { height: 46px; background: rgba(0,44,152,.2); border: 1px solid rgba(0,44,152,.4); border-radius: var(--r-sm); }
+    .mock-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+    .mock-half { height: 30px; border-radius: var(--r-sm); }
+
+    /* Floating badges */
+    .float-badge {
+      position: absolute;
+      background: rgba(0,9,30,.96); border: 1px solid var(--c-border-bright);
+      border-radius: var(--r-md); padding: 12px 16px;
+      display: flex; align-items: center; gap: 10px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 32px rgba(0,0,0,.45), 0 0 0 1px rgba(101,219,255,.08);
+      white-space: nowrap;
+    }
+    .float-badge-icon {
+      width: 36px; height: 36px; border-radius: var(--r-sm);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .float-badge-icon svg { width: 18px; height: 18px; }
+    .fb-main { font-family: var(--f-head); font-size: var(--t-sm); font-weight: 700; color: var(--c-text); }
+    .fb-sub  { font-size: var(--t-xs); color: var(--c-muted); }
+    .fb1 { top: -18px; right: -24px; animation: fbFloat1 5s ease-in-out infinite; }
+    .fb2 { bottom: 50px; left: -36px; animation: fbFloat2 6.5s ease-in-out infinite; }
+    .fb3 { bottom: -16px; right: 16px; animation: fbFloat3 4.8s ease-in-out infinite; }
+    @keyframes fbFloat1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    @keyframes fbFloat2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(9px)} }
+    @keyframes fbFloat3 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+
+    @media (max-width: 900px) {
+      .hero-content { grid-template-columns: 1fr; text-align: center; }
+      .hero-sub { margin: 0 auto var(--sp-xl); }
+      .hero-actions { justify-content: center; }
+      .hero-right { display: none; }
+    }
+
+    /* ─── STATS BAR ────────────────────────────────────── */
+    .stats-bar {
+      background: linear-gradient(90deg, rgba(0,44,152,.16), rgba(0,44,152,.08));
+      border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border);
+      padding: var(--sp-lg) 0;
+    }
+    .stats-bar-inner {
+      display: flex; align-items: center; justify-content: space-around; gap: var(--sp-lg);
+    }
+    .stat-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .stat-value {
+      font-family: var(--f-head); font-size: var(--t-4xl); font-weight: 800;
+      color: var(--c-action); line-height: 1;
+    }
+    .stat-label { font-size: var(--t-sm); color: var(--c-muted); text-align: center; }
+    .stat-div { width: 1px; height: 40px; background: var(--c-border); }
+    @media (max-width: 640px) { .stats-bar-inner { flex-wrap: wrap; } .stat-div { display: none; } }
+
+    /* ─── SECTION BASE ─────────────────────────────────── */
+    .section { padding: var(--sp-2xl) 0; }
+    .section-alt { background: var(--c-bg2); }
+    .section-header { text-align: center; margin-bottom: var(--sp-xl); }
+    .section-title {
+      font-size: clamp(var(--t-3xl), 4vw, var(--t-5xl));
+      font-weight: 800; letter-spacing: -.022em; margin-bottom: var(--sp-md);
+    }
+    .section-desc { font-size: var(--t-lg); color: var(--c-muted); max-width: 560px; margin: 0 auto; }
+
+    /* ─── SERVICES ─────────────────────────────────────── */
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-lg); }
+    @media (max-width: 1100px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px)  { .services-grid { grid-template-columns: 1fr; } }
+    .service-card {
+      background: var(--c-card); border: 1px solid var(--c-border);
+      border-radius: var(--r-xl); padding: var(--sp-xl) var(--sp-lg);
+      position: relative; overflow: hidden; transition: var(--t); cursor: default;
+    }
+    .service-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(101,219,255,.04), transparent);
+      opacity: 0; transition: var(--t);
+    }
+    .service-card:hover {
+      border-color: rgba(101,219,255,.32); transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(0,0,0,.3), 0 0 0 1px rgba(101,219,255,.12);
+    }
+    .service-card:hover::after { opacity: 1; }
+    .service-icon {
+      width: 52px; height: 52px; background: rgba(0,44,152,.28);
+      border: 1px solid var(--c-border); border-radius: var(--r-md);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: var(--sp-lg); transition: var(--t);
+    }
+    .service-card:hover .service-icon {
+      background: rgba(101,219,255,.1); border-color: rgba(101,219,255,.28);
+      box-shadow: 0 0 20px rgba(101,219,255,.14);
+    }
+    .service-icon svg { width: 24px; height: 24px; stroke: var(--c-action); fill: none; stroke-width: 1.5; }
+    .service-title { font-family: var(--f-head); font-size: var(--t-xl); font-weight: 700; margin-bottom: var(--sp-sm); }
+    .service-desc { color: var(--c-muted); font-size: var(--t-sm); line-height: 1.75; margin-bottom: var(--sp-lg); }
+    .service-price { font-family: var(--f-head); font-size: var(--t-2xl); font-weight: 800; color: var(--c-action); }
+    .service-price-note { font-size: var(--t-xs); color: var(--c-muted); margin-left: 4px; }
+    .service-list { list-style: none; margin-top: var(--sp-md); display: flex; flex-direction: column; gap: 8px; }
+    .service-list li {
+      font-size: var(--t-sm); color: var(--c-muted);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .service-list li::before {
+      content: '✓'; color: var(--c-action); font-weight: 700; font-size: 10px;
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 1px solid rgba(101,219,255,.38);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+
+    /* ─── PROCESS ──────────────────────────────────────── */
+    .process-section { background: var(--c-bg2); }
+    .process-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--sp-lg); }
+    .process-step {
+      background: var(--c-card); border: 1px solid var(--c-border);
+      border-radius: var(--r-xl); padding: var(--sp-xl) var(--sp-lg);
+      text-align: center; transition: var(--t);
+    }
+    .process-step:hover { border-color: rgba(101,219,255,.28); transform: translateY(-4px); }
+    .process-number {
+      font-family: var(--f-head); font-size: var(--t-7xl); font-weight: 800;
+      color: rgba(0,44,152,.38); line-height: 1; margin-bottom: var(--sp-md); letter-spacing: -.04em;
+    }
+    .process-icon {
+      width: 54px; height: 54px; background: rgba(0,44,152,.2); border: 1px solid var(--c-border);
+      border-radius: var(--r-md); display: flex; align-items: center; justify-content: center;
+      margin: 0 auto var(--sp-md);
+    }
+    .process-icon svg { width: 26px; height: 26px; stroke: var(--c-action); fill: none; stroke-width: 1.5; }
+    .process-title { font-family: var(--f-head); font-size: var(--t-xl); font-weight: 700; margin-bottom: var(--sp-sm); }
+    .process-desc { color: var(--c-muted); font-size: var(--t-sm); line-height: 1.75; }
+    @media (max-width: 768px) { .process-steps { grid-template-columns: 1fr; } }
+
+    /* ─── WHY US ───────────────────────────────────────── */
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2xl); align-items: center; }
+    .why-features { display: flex; flex-direction: column; gap: var(--sp-lg); }
+    .why-feature { display: flex; gap: var(--sp-md); align-items: flex-start; }
+    .why-feature-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: rgba(0,44,152,.2); border: 1px solid var(--c-border);
+      border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center;
+    }
+    .why-feature-icon svg { width: 20px; height: 20px; stroke: var(--c-action); fill: none; stroke-width: 1.5; }
+    .why-feature-text h4 { font-family: var(--f-head); font-size: var(--t-lg); font-weight: 700; margin-bottom: 4px; }
+    .why-feature-text p { color: var(--c-muted); font-size: var(--t-sm); line-height: 1.75; }
+
+    .why-visual {
+      border-radius: var(--r-xl);
+      background: linear-gradient(145deg, rgba(0,20,64,.85), rgba(0,44,152,.12));
+      border: 1px solid var(--c-border); padding: var(--sp-xl);
+      display: flex; flex-direction: column; gap: var(--sp-md); overflow: hidden; position: relative;
+    }
+    .why-visual::before {
+      content: ''; position: absolute; top: 0; right: 0;
+      width: 240px; height: 240px;
+      background: radial-gradient(circle, rgba(101,219,255,.08), transparent 70%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .code-line {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; background: rgba(0,44,152,.14);
+      border-radius: var(--r-sm); font-family: 'Courier New', monospace; font-size: var(--t-sm);
+    }
+    .c-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .c-dot.b { background: #65DBFF } .c-dot.g { background: #4ADE80 }
+    .c-dot.p { background: #A78BFA } .c-dot.y { background: #FBBF24 }
+    .code-text { color: var(--c-muted); }
+    .kw  { color: #65DBFF } .fn { color: #A78BFA } .str { color: #4ADE80 }
+    .cm  { color: rgba(238,238,238,.3) }
+
+    .progress-wrap { margin-top: 4px; }
+    .progress-head {
+      display: flex; justify-content: space-between;
+      font-size: var(--t-xs); color: var(--c-muted);
+      margin-bottom: 6px; font-family: var(--f-head); font-weight: 600;
+    }
+    .progress-track { height: 6px; background: rgba(0,44,152,.3); border-radius: 3px; overflow: hidden; }
+    .progress-fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--c-brand-mid), var(--c-action));
+      box-shadow: 0 0 8px rgba(101,219,255,.3);
+      transition: width 1.6s cubic-bezier(.16,1,.3,1); width: 0;
+    }
+    .progress-fill.go { width: var(--w); }
+    @media (max-width: 900px) { .why-grid { grid-template-columns: 1fr; } }
+
+    /* ─── TESTIMONIALS ─────────────────────────────────── */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: var(--sp-lg); }
+    .testimonial-card {
+      background: var(--c-card); border: 1px solid var(--c-border);
+      border-radius: var(--r-xl); padding: var(--sp-xl); transition: var(--t);
+    }
+    .testimonial-card:hover { border-color: rgba(101,219,255,.2); transform: translateY(-4px); }
+    .t-stars { display: flex; gap: 4px; margin-bottom: var(--sp-md); }
+    .t-star { color: #FBBF24; font-size: var(--t-lg); }
+    .t-text { color: var(--c-muted); font-size: var(--t-sm); line-height: 1.85; margin-bottom: var(--sp-lg); font-style: italic; }
+    .t-author { display: flex; align-items: center; gap: var(--sp-md); }
+    .t-avatar {
+      width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--c-brand-mid), var(--c-action));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--f-head); font-weight: 700; color: var(--c-bg); font-size: var(--t-sm);
+    }
+    .t-name { font-family: var(--f-head); font-weight: 700; font-size: var(--t-sm); }
+    .t-role { font-size: var(--t-xs); color: var(--c-muted); }
+
+    /* ─── PRICING ──────────────────────────────────────── */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--sp-lg); align-items: start; }
+    .pricing-grid-2 { grid-template-columns: repeat(2,1fr); max-width: 800px; margin: 0 auto; }
+    .pricing-card {
+      background: var(--c-card); border: 1px solid var(--c-border);
+      border-radius: var(--r-xl); padding: var(--sp-xl) var(--sp-lg); transition: var(--t);
+    }
+    .pricing-card.featured {
+      background: linear-gradient(145deg, rgba(0,44,152,.38), rgba(0,71,212,.12));
+      border-color: rgba(101,219,255,.38);
+      box-shadow: 0 0 44px rgba(101,219,255,.1), 0 20px 60px rgba(0,0,0,.28);
+      position: relative;
+    }
+    .pricing-card:hover:not(.featured) { border-color: rgba(101,219,255,.2); transform: translateY(-4px); }
+    .pricing-card.featured:hover { transform: translateY(-4px); }
+    .pricing-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--c-action); color: var(--c-bg);
+      font-family: var(--f-head); font-size: var(--t-xs); font-weight: 700;
+      padding: 4px 18px; border-radius: var(--r-full);
+      letter-spacing: .08em; text-transform: uppercase; white-space: nowrap;
+    }
+    .p-name { font-family: var(--f-head); font-size: var(--t-lg); font-weight: 700; color: var(--c-muted); margin-bottom: var(--sp-sm); }
+    .p-price { font-family: var(--f-head); font-size: var(--t-5xl); font-weight: 800; line-height: 1; margin-bottom: 4px; }
+    .p-price.cyan { color: var(--c-action); }
+    .p-period { font-size: var(--t-sm); color: var(--c-muted); margin-bottom: var(--sp-lg); }
+    .p-divider { height: 1px; background: var(--c-border); margin: var(--sp-lg) 0; }
+    .p-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: var(--sp-xl); }
+    .p-features li { font-size: var(--t-sm); color: var(--c-muted); display: flex; align-items: center; gap: 10px; }
+    .p-features li.yes::before {
+      content: '✓'; width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(101,219,255,.1); border: 1px solid rgba(101,219,255,.3);
+      color: var(--c-action); display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700;
+    }
+    .p-features li.no::before {
+      content: '✕'; width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08);
+      color: rgba(255,255,255,.18); display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700;
+    }
+    .btn-p {
+      width: 100%; justify-content: center; padding: 14px 24px;
+      border-radius: var(--r-md);
+    }
+    .btn-p-ghost {
+      width: 100%; padding: 14px 24px; border-radius: var(--r-md);
+      background: transparent; border: 1.5px solid var(--c-border);
+      color: var(--c-text); font-family: var(--f-head); font-size: var(--t-sm); font-weight: 700;
+      cursor: pointer; transition: var(--t); display: block; text-align: center;
+    }
+    .btn-p-ghost:hover { border-color: var(--c-action); color: var(--c-action); }
+    @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; } }
+    @media (max-width: 640px) { .pricing-grid-2 { grid-template-columns: 1fr; max-width: 440px; } }
+
+    /* ─── FAQ ──────────────────────────────────────────── */
+    .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--sp-sm); }
+    .faq-item {
+      background: var(--c-card); border: 1px solid var(--c-border);
+      border-radius: var(--r-md); overflow: hidden; transition: var(--t);
+    }
+    .faq-item.open { border-color: rgba(101,219,255,.22); }
+    .faq-q {
+      width: 100%; background: none; border: none; padding: var(--sp-lg);
+      text-align: left; font-family: var(--f-head); font-size: var(--t-base); font-weight: 700;
+      color: var(--c-text); cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: var(--sp-md);
+    }
+    .faq-chevron {
+      width: 20px; height: 20px; flex-shrink: 0;
+      border: 1.5px solid var(--c-muted); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; color: var(--c-muted); transition: var(--t);
+    }
+    .faq-item.open .faq-chevron { border-color: var(--c-action); color: var(--c-action); transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s cubic-bezier(.16,1,.3,1), padding .3s;
+      padding: 0 var(--sp-lg); color: var(--c-muted); font-size: var(--t-sm); line-height: 1.85;
+    }
+    .faq-a.open { max-height: 320px; padding-bottom: var(--sp-lg); }
+
+    /* ─── FINAL CTA ────────────────────────────────────── */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(0,44,152,.28), rgba(0,8,27,.6));
+      border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border);
+      text-align: center;
+    }
+    .cta-title { font-size: clamp(var(--t-3xl), 4vw, var(--t-5xl)); font-weight: 800; letter-spacing: -.022em; margin-bottom: var(--sp-md); }
+    .cta-desc { font-size: var(--t-lg); color: var(--c-muted); max-width: 500px; margin: 0 auto var(--sp-xl); }
+    .cta-actions { display: flex; gap: var(--sp-md); justify-content: center; flex-wrap: wrap; }
+    .cta-note { margin-top: var(--sp-lg); font-size: var(--t-sm); color: var(--c-muted); }
+
+    /* ─── FOOTER ───────────────────────────────────────── */
+    .footer { background: var(--c-bg); border-top: 1px solid var(--c-border); padding: var(--sp-xl) 0 var(--sp-lg); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--sp-xl); margin-bottom: var(--sp-xl); }
+    .footer-brand p { color: var(--c-muted); font-size: var(--t-sm); line-height: 1.8; margin-top: var(--sp-md); max-width: 260px; }
+    .footer-col-title { font-family: var(--f-head); font-size: var(--t-sm); font-weight: 700; color: var(--c-text); margin-bottom: var(--sp-md); }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: var(--t-sm); color: var(--c-muted); transition: color var(--t); }
+    .footer-links a:hover { color: var(--c-action); }
+    .footer-bottom {
+      border-top: 1px solid var(--c-border); padding-top: var(--sp-lg);
+      display: flex; justify-content: space-between; align-items: center; gap: var(--sp-md);
+    }
+    .footer-copy { font-size: var(--t-xs); color: var(--c-muted); }
+    .footer-socials { display: flex; gap: var(--sp-md); }
+    .footer-social {
+      width: 36px; height: 36px; border-radius: var(--r-sm); border: 1px solid var(--c-border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--c-muted); transition: var(--t);
+    }
+    .footer-social:hover { border-color: var(--c-action); color: var(--c-action); }
+    .footer-social svg { width: 16px; height: 16px; }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1/-1; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    /* ─── CASE STUDIES ──────────────────────────────────── */
+    .cs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-lg); }
+    @media (max-width: 900px) { .cs-grid { grid-template-columns: 1fr; } }
+
+    .cs-card {
+      background: var(--c-card);
+      border: 1px solid var(--c-border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      transition: var(--t);
+    }
+    .cs-card:hover { transform: translateY(-4px); border-color: rgba(101,219,255,.2); }
+
+    .cs-mockup {
+      height: 210px; overflow: hidden;
+      position: relative;
+    }
+    .cs-screenshot {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
+      display: block;
+      transition: transform .6s cubic-bezier(.16,1,.3,1);
+    }
+    .cs-card:hover .cs-screenshot { transform: scale(1.03); }
+
+    .cs-body { padding: var(--sp-lg); }
+    .cs-industry {
+      font-family: var(--f-head); font-size: var(--t-xs); font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--c-action); margin-bottom: var(--sp-sm);
+    }
+    .cs-title {
+      font-family: var(--f-head); font-size: var(--t-2xl); font-weight: 700;
+      margin-bottom: var(--sp-sm);
+    }
+    .cs-quote {
+      font-size: var(--t-sm); color: var(--c-muted);
+      font-style: italic; line-height: 1.5; margin-bottom: var(--sp-md);
+    }
+    .cs-stats { display: flex; gap: var(--sp-lg); margin-bottom: var(--sp-md); }
+    .cs-stat-val {
+      font-family: var(--f-head); font-size: var(--t-2xl);
+      font-weight: 800; color: var(--c-action); line-height: 1;
+    }
+    .cs-stat-label { font-size: var(--t-xs); color: var(--c-muted); margin-top: 2px; }
+    .cs-tags { display: flex; flex-wrap: wrap; gap: var(--sp-sm); }
+    .cs-tag {
+      font-size: var(--t-xs); font-weight: 600;
+      padding: 3px 10px; border-radius: var(--r-full);
+      background: rgba(0,44,152,.35); border: 1px solid var(--c-border); color: var(--c-muted);
+    }
+
+    /* ─── POWER-UP ADDONS ────────────────────────────────── */
+    .addons-divider {
+      display: flex; align-items: center; gap: var(--sp-md);
+      margin-top: var(--sp-xl); margin-bottom: var(--sp-lg);
+      font-family: var(--f-head); font-size: var(--t-sm); font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--c-muted);
+    }
+    .addons-divider::before, .addons-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--c-border);
+    }
+    .addons-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: var(--sp-md);
+    }
+    @media (max-width: 700px) { .addons-grid { grid-template-columns: 1fr; } }
+
+    .addon-card {
+      background: rgba(0,44,152,.1);
+      border: 1px solid var(--c-border);
+      border-radius: var(--r-lg);
+      padding: var(--sp-lg);
+      display: flex; flex-direction: column; gap: var(--sp-sm);
+      transition: var(--t);
+    }
+    .addon-card:hover { border-color: rgba(101,219,255,.3); background: rgba(0,44,152,.2); }
+    .addon-icon {
+      width: 40px; height: 40px; border-radius: var(--r-md);
+      background: rgba(101,219,255,.07); border: 1px solid rgba(101,219,255,.18);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--c-action); flex-shrink: 0;
+    }
+    .addon-name { font-family: var(--f-head); font-size: var(--t-base); font-weight: 700; }
+    .addon-desc { font-size: var(--t-sm); color: var(--c-muted); line-height: 1.5; flex: 1; }
+    .addon-price {
+      font-family: var(--f-head); font-size: var(--t-xl); font-weight: 800; color: var(--c-action);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">
+          <span class="nav-logo-text">Site<span>Snap</span></span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#services">Usługi</a></li>
+          <li><a href="#process">Jak działamy</a></li>
+          <li><a href="#realizacje">Realizacje</a></li>
+          <li><a href="#pricing">Cennik</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <a href="#contact" class="btn btn-primary nav-cta" style="padding:10px 22px;font-size:var(--t-sm)">Bezpłatna wycena</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Otwórz menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="nav-mobile" id="navMobile">
+        <a href="#services">Usługi</a>
+        <a href="#process">Jak działamy</a>
+        <a href="#realizacje">Realizacje</a>
+        <a href="#pricing">Cennik</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">Bezpłatna wycena</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-left">
+          <h1 class="hero-headline">
+            <span class="line">Twoja strona.</span>
+            <span class="line hl-action">Gotowa w 48h.</span>
+            <span class="line">Klienci czekają.</span>
+          </h1>
+          <p class="hero-sub">
+            Kodujemy strony od zera — HTML, CSS, JavaScript. Żadnych szablonów, żadnych page-builderów. Czyste, szybkie i estetyczne, bo design to dla nas priorytet.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">
+              Zamów bezpłatną wycenę
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#services" class="btn btn-outline">Zobacz usługi</a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="mockup-wrap">
+            <div class="mockup-main">
+              <div class="mockup-browser-bar">
+                <div class="mockup-dot"></div>
+                <div class="mockup-dot"></div>
+                <div class="mockup-dot"></div>
+                <div class="mockup-url">
+                  <div class="mockup-url-dot"></div>
+                  <div class="mockup-url-bar"></div>
+                </div>
+              </div>
+              <div class="mockup-screen-hero">
+                <div class="mock-line c"></div>
+                <div class="mock-line" style="width:78%"></div>
+                <div class="mock-line s"></div>
+                <div class="mock-btn"></div>
+              </div>
+              <div class="mock-cards">
+                <div class="mock-card"></div>
+                <div class="mock-card"></div>
+                <div class="mock-card"></div>
+              </div>
+              <div class="mock-row2">
+                <div class="mock-half" style="background:rgba(0,44,152,.22)"></div>
+                <div class="mock-half" style="background:rgba(101,219,255,.1)"></div>
+              </div>
+            </div>
+
+            <div class="float-badge fb1">
+              <div class="float-badge-icon" style="background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3)">
+                <!-- rakieta / launch -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+              </div>
+              <div>
+                <div class="fb-main">Strona wdrożona!</div>
+                <div class="fb-sub">klient-firma.pl • przed chwilą</div>
+              </div>
+            </div>
+
+            <div class="float-badge fb2">
+              <div class="float-badge-icon" style="background:rgba(101,219,255,.1);border:1px solid rgba(101,219,255,.3)">
+                <!-- wykres słupkowy / wzrost -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="#65DBFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+              </div>
+              <div>
+                <div class="fb-main">+340% ruchu</div>
+                <div class="fb-sub">organiczne wejścia • miesiąc</div>
+              </div>
+            </div>
+
+            <div class="float-badge fb3">
+              <div class="float-badge-icon" style="background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3)">
+                <!-- tarcza / gwarancja -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              </div>
+              <div>
+                <div class="fb-main">Gwarancja terminu</div>
+                <div class="fb-sub">lub zwrot pieniędzy</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="container">
+      <div class="stats-bar-inner">
+        <div class="stat-item">
+          <span class="stat-value" data-target="48" data-suffix="h">48h</span>
+          <span class="stat-label">średni czas realizacji</span>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat-item">
+          <span class="stat-value" data-target="95" data-suffix="/100">95/100</span>
+          <span class="stat-label">średnia PageSpeed</span>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat-item">
+          <span class="stat-value" data-target="100" data-suffix="%">100%</span>
+          <span class="stat-label">zadowolonych klientów</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Usługi</div>
+        <h2 class="section-title">Co robimy?</h2>
+        <p class="section-desc">Kodujemy ręcznie. Dbamy o design. Żadnych szablonów, żadnego page-buildera — czysty kod dopasowany do Ciebie.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <h3 class="service-title">Landing Page</h3>
+          <p class="service-desc">Jedna strona, jeden cel. Ręcznie zakodowana w HTML/CSS/JS — lekka, szybka i estetyczna. Zero szablonów.</p>
+        </div>
+
+        <div class="service-card reveal" style="transition-delay:.1s">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 class="service-title">Strona Wizytówka</h3>
+          <p class="service-desc">Kilka podstron, spójna identyfikacja. Każda linia kodu pisana ręcznie — pełna kontrola nad wyglądem i wydajnością.</p>
+        </div>
+
+        <div class="service-card reveal" style="transition-delay:.2s">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <h3 class="service-title">Strona Portfolio</h3>
+          <p class="service-desc">Prezentacja Twoich prac lub usług. Estetyczny projekt, płynne animacje — strona która robi wrażenie od pierwszego scrolla.</p>
+        </div>
+
+        <div class="service-card reveal" style="transition-delay:.3s">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+          </div>
+          <h3 class="service-title">Odświeżenie strony</h3>
+          <p class="service-desc">Brzydka lub wolna strona? Przepisujemy od zera — nowy kod, nowy wygląd, zachowana struktura URL i pozycje SEO.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section process-section" id="process">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Jak działamy</div>
+        <h2 class="section-title">3 kroki do gotowej strony</h2>
+        <p class="section-desc">Prosty, transparentny proces. Wiesz co dostaniesz, kiedy dostaniesz i za ile.</p>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="process-number">01</div>
+          <div class="process-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3 class="process-title">Brief & wycena</h3>
+          <p class="process-desc">Wypełniasz krótki formularz. W ciągu 24 godzin oddzwaniamy z wyceną i terminem.</p>
+        </div>
+        <div class="process-step reveal" style="transition-delay:.15s">
+          <div class="process-number">02</div>
+          <div class="process-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <h3 class="process-title">Projekt & realizacja</h3>
+          <p class="process-desc">Kodujemy od zera w HTML, CSS i JS. Widzisz postępy na bieżąco przez udostępniony link do podglądu.</p>
+        </div>
+        <div class="process-step reveal" style="transition-delay:.3s">
+          <div class="process-number">03</div>
+          <div class="process-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3 class="process-title">Wdrożenie & wsparcie</h3>
+          <p class="process-desc">Stawiamy stronę na hostingu, konfigurujemy domenę. Gotowe — strona działa i jest Twoja.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="section" id="why">
+    <div class="container">
+      <div class="why-grid">
+        <div class="why-features">
+          <div class="reveal">
+            <div class="section-label">Dlaczego SiteSnap?</div>
+            <h2 class="section-title" style="text-align:left">Kodujemy.<br>Nie klikamy w kreator.</h2>
+          </div>
+          <div class="why-feature reveal" style="transition-delay:.1s">
+            <div class="why-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div class="why-feature-text">
+              <h4>Czysty kod, nie szablon</h4>
+              <p>Każda strona pisana od zera w HTML, CSS i JS. Zero page-builderów, zero pluginów, zero balastu. <span style="white-space: nowrap">Pełna kontrola nad każdą linią.</span></p>
+            </div>
+          </div>
+          <div class="why-feature reveal" style="transition-delay:.2s">
+            <div class="why-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="why-feature-text">
+              <h4>Design traktujemy serio</h4>
+              <p>Nie tylko kodujemy — projektujemy. Każda strona ma przemyślaną kompozycję, typografię i animacje. Wygląd to nie dodatek, to cel.</p>
+            </div>
+          </div>
+          <div class="why-feature reveal" style="transition-delay:.3s">
+            <div class="why-feature-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+            </div>
+            <div class="why-feature-text">
+              <h4>Żadnego CMS-a do ogarnięcia</h4>
+              <p>Nie wdrażamy skomplikowanych paneli administracyjnych. Formularz kontaktowy? Google Form — prosty, działa od razu, nic do nauki.</p>
+            </div>
+          </div>
+          <div class="why-feature reveal" style="transition-delay:.4s">
+            <div class="why-feature-icon">
+              <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="why-feature-text">
+              <h4>PageSpeed jak mało kto</h4>
+              <p>Ręcznie pisany kod jest lżejszy od każdego WordPressa. Strony ładują się błyskawicznie — a Google nagradza szybkie strony wyższymi pozycjami.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="why-visual reveal" style="transition-delay:.2s" id="whyVisual">
+          <div class="code-line">
+            <div class="c-dot b"></div>
+            <span class="code-text"><span class="kw">const</span> site = <span class="fn">buildSite</span>(<span class="str">'client'</span>)</span>
+          </div>
+          <div class="code-line">
+            <div class="c-dot g"></div>
+            <span class="code-text"><span class="kw">await</span> site.<span class="fn">deploy</span>() <span class="cm">// ✓ 7 days</span></span>
+          </div>
+          <div class="code-line">
+            <div class="c-dot p"></div>
+            <span class="code-text">performance.<span class="fn">score</span>() <span class="cm">// → 98</span></span>
+          </div>
+          <div class="code-line">
+            <div class="c-dot y"></div>
+            <span class="code-text">client.<span class="fn">isHappy</span>() <span class="cm">// → true</span></span>
+          </div>
+
+          <div class="progress-wrap">
+            <div class="progress-head"><span>Wydajność (PageSpeed)</span><span>95/100</span></div>
+            <div class="progress-track"><div class="progress-fill" style="--w:95%"></div></div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-head"><span>Terminowość dostaw</span><span>100%</span></div>
+            <div class="progress-track"><div class="progress-fill" style="--w:100%"></div></div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-head"><span>Satysfakcja klientów</span><span>100%</span></div>
+            <div class="progress-track"><div class="progress-fill" style="--w:100%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CASE STUDIES -->
+  <section class="section" id="realizacje">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Realizacje</div>
+        <h2 class="section-title">Nasze strony.</h2>
+        <p class="section-desc">Każdy projekt kodujemy od zera — dopasowany do branży, klienta i jego celu.</p>
+      </div>
+      <div class="cs-grid">
+
+        <!-- SolarHaus -->
+        <div class="cs-card reveal">
+          <div class="cs-mockup">
+            <img src="/screenshots/SolarHaus.png" alt="SolarHaus — strona internetowa" class="cs-screenshot">
+          </div>
+          <div class="cs-body">
+            <div class="cs-industry">⚡ Fotowoltaika</div>
+            <div class="cs-title">SolarHaus</div>
+            <p class="cs-quote">„Energia, która należy do Ciebie."</p>
+            <div class="cs-stats">
+              <div>
+                <div class="cs-stat-val">React</div>
+                <div class="cs-stat-label">technologia</div>
+              </div>
+              <div>
+                <div class="cs-stat-val">48h</div>
+                <div class="cs-stat-label">realizacja</div>
+              </div>
+              <div>
+                <div class="cs-stat-val">80</div>
+                <div class="cs-stat-label">PageSpeed</div>
+              </div>
+            </div>
+            <div class="cs-tags">
+              <span class="cs-tag">React + Vite</span>
+              <span class="cs-tag">Kalkulator oszczędności</span>
+              <span class="cs-tag">Animacje scroll</span>
+              <span class="cs-tag">Mobile-first</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kancelaria Iustitia -->
+        <div class="cs-card reveal" style="transition-delay:.1s">
+          <div class="cs-mockup">
+            <img src="/screenshots/Kancelaria.png" alt="Kancelaria Iustitia — strona internetowa" class="cs-screenshot">
+          </div>
+          <div class="cs-body">
+            <div class="cs-industry">⚖️ Prawo & Odszkodowania</div>
+            <div class="cs-title">Kancelaria Iustitia</div>
+            <p class="cs-quote">„Wypadek nie był Twoją winą."</p>
+            <div class="cs-stats">
+              <div>
+                <div class="cs-stat-val">HTML</div>
+                <div class="cs-stat-label">technologia</div>
+              </div>
+              <div>
+                <div class="cs-stat-val">24h</div>
+                <div class="cs-stat-label">realizacja</div>
+              </div>
+              <div>
+                <div class="cs-stat-val">81</div>
+                <div class="cs-stat-label">PageSpeed</div>
+              </div>
+            </div>
+            <div class="cs-tags">
+              <span class="cs-tag">HTML / CSS / JS</span>
+              <span class="cs-tag">Animacje wejścia</span>
+              <span class="cs-tag">Formularz Google</span>
+              <span class="cs-tag">SEO lokalne</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Cennik</div>
+        <h2 class="section-title">Pakiety dopasowane do Twojego biznesu.</h2>
+        <p class="section-desc">Wiesz ile zapłacisz zanim podpiszesz. Żadnych niespodzianek po drodze.</p>
+      </div>
+      <div class="pricing-grid pricing-grid-2">
+        <div class="pricing-card reveal">
+          <div class="p-name">Pakiet Start-Up Snap</div>
+          <div class="p-price">299 zł</div>
+          <div class="p-period">jednorazowo</div>
+          <div class="p-divider"></div>
+          <ul class="p-features">
+            <li class="yes">Strona typu Landing Page (One-Page)</li>
+            <li class="yes">Idealna dla konkretnej usługi</li>
+            <li class="yes">Gotowa w 48h</li>
+            <li class="yes">Optymalizacja pod urządzenia mobilne</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary btn-p">Zamów Start-Up →</a>
+        </div>
+
+        <div class="pricing-card featured reveal" style="transition-delay:.1s">
+          <div class="pricing-badge">Najpopularniejszy</div>
+          <div class="p-name">Pakiet Business Snap</div>
+          <div class="p-price cyan">649 zł</div>
+          <div class="p-period">jednorazowo</div>
+          <div class="p-divider"></div>
+          <ul class="p-features">
+            <li class="yes">Rozbudowana strona (do 5 podstron)</li>
+            <li class="yes">Pełna prezentacja firmy i oferty</li>
+            <li class="yes">Gotowa w 72h</li>
+            <li class="yes">Optymalizacja pod urządzenia mobilne</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary btn-p">Zamów Business →</a>
+        </div>
+      </div>
+
+      <div class="addons-divider reveal">Dodatki Power-Up</div>
+      <div class="addons-grid">
+
+        <div class="addon-card reveal">
+          <div class="addon-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="addon-name">Snap-Chat</div>
+          <p class="addon-desc">Pływający przycisk WhatsApp łączący klienta bezpośrednio z Twoim numerem — jeden klik do rozmowy.</p>
+        </div>
+
+        <div class="addon-card reveal" style="transition-delay:.1s">
+          <div class="addon-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div class="addon-name">Snap-Lead</div>
+          <p class="addon-desc">Profesjonalny formularz wyceny i kontaktu zintegrowany z Twoim e-mailem przez Google Forms.</p>
+        </div>
+
+        <div class="addon-card reveal" style="transition-delay:.2s">
+          <div class="addon-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="addon-name">Snap-Map</div>
+          <p class="addon-desc">Interaktywna mapa Google dojazdu do Twojej firmy — klient wie dokładnie, gdzie jesteś.</p>
+        </div>
+
+        <div class="addon-card reveal" style="transition-delay:.3s">
+          <div class="addon-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+          </div>
+          <div class="addon-name">i wiele innych</div>
+          <p class="addon-desc">Masz pomysł na coś więcej? Zapytaj — chętnie dopasujemy rozwiązanie do Twoich potrzeb.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-alt" id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title">Najczęstsze pytania</h2>
+        <p class="section-desc">Masz pytania? Tu znajdziesz odpowiedzi na te, które słyszymy najczęściej.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-q">Czy naprawdę 7 dni to realny termin?<span class="faq-chevron">▾</span></button>
+          <div class="faq-a">Tak, dla landing page i strony wizytówki 7 dni to nasz standard. Warunek: materiały (teksty, zdjęcia, logo) dostarczasz w ciągu 48h od startu. Przy stronie portfolio z rozbudowaną galerią termin może wynosić 10–14 dni.</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">Czy po wdrożeniu mogę sam edytować treści?<span class="faq-chevron">▾</span></button>
+          <div class="faq-a">Strony kodujemy ręcznie — nie instalujemy CMS-a ani paneli administracyjnych. Jeśli chcesz coś zmienić, napisz do nas — poprawki w kodzie zajmują zazwyczaj kilka minut. Przy większych zmianach możemy ustalić stałą stawkę abonamentową.</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">Czy strona będzie dobrze wyglądać na telefonie?<span class="faq-chevron">▾</span></button>
+          <div class="faq-a">Wszystkie strony budujemy metodą mobile-first — najpierw projektujemy dla telefonów, potem skalujemy na desktop. Przed wdrożeniem testujemy na realnych urządzeniach: iPhone, Android, tablet.</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">Co jeśli nie będę zadowolony z projektu?<span class="faq-chevron">▾</span></button>
+          <div class="faq-a">Projekt graficzny w Figma akceptujesz zanim zaczniemy kodować. Masz prawo do 3 rund poprawek projektowych w cenie. Jeśli po tym etapie zdecydujesz się zrezygnować, zwracamy 50% wpłaconej zaliczki.</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">Czy pomagacie z domeną i hostingiem?<span class="faq-chevron">▾</span></button>
+          <div class="faq-a">Tak — pomożemy wybrać, kupić i skonfigurować domenę oraz hosting. Konfigurujemy SSL, DNS i e-maile firmowe. Wszystko wchodzi w cenę wdrożenia, bez dopłat.</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">Jak wygląda płatność?<span class="faq-chevron">▾</span></button>
+          <div class="faq-a">50% zaliczki na start, 50% po akceptacji projektu graficznego — przed wdrożeniem. Wystawiamy faktury VAT. Przy projektach powyżej 5 000 zł możliwy rozłożony harmonogram płatności.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="section cta-section" id="contact">
+    <div class="container">
+      <div class="reveal">
+        <h2 class="cta-title">Gotowy na nową stronę?<br><span class="text-action">Zacznijmy.</span></h2>
+        <p class="cta-desc">Bezpłatna wycena w 24 godziny. Termin realizacji z góry. Bez ryzyka.</p>
+        <div class="cta-actions">
+          <a href="mailto:kontakt@sitesnap.pl" class="btn btn-primary" style="font-size:var(--t-lg);padding:18px 44px">
+            Napisz do nas →
+          </a>
+          <a href="tel:+48000000000" class="btn btn-outline">Zadzwoń teraz</a>
+        </div>
+        <p class="cta-note">✓ Bezpłatna wycena &nbsp;·&nbsp; ✓ Gwarantowany termin &nbsp;·&nbsp; ✓ Stała cena</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo">
+            <span class="nav-logo-text">Site<span>Snap</span></span>
+          </a>
+          <p>Budujemy nowoczesne strony internetowe, które działają — szybko, estetycznie i zgodnie z terminem.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Usługi</div>
+          <ul class="footer-links">
+            <li><a href="#services">Landing Page</a></li>
+            <li><a href="#services">Strona Wizytówka</a></li>
+            <li><a href="#services">Sklep Internetowy</a></li>
+            <li><a href="#services">Redesign</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Firma</div>
+          <ul class="footer-links">
+            <li><a href="#why">O nas</a></li>
+            <li><a href="#process">Jak działamy</a></li>
+            <li><a href="#pricing">Cennik</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Kontakt</div>
+          <ul class="footer-links">
+            <li><a href="mailto:kontakt@sitesnap.pl">kontakt@sitesnap.pl</a></li>
+            <li><a href="tel:+48000000000">+48 000 000 000</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">Behance</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2025 SiteSnap. Wszelkie prawa zastrzeżone.</div>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="Behance">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.051-1.965-5.051-5.219 0-3.19 1.945-5.301 5.009-5.301 3.036 0 4.859 1.965 5.1 5.069.013.298.011.622-.001.944H14.05c.099 2.12 1.36 2.612 2.513 2.612 1.172 0 1.852-.538 2.163-1.105zM14.05 14h5.475c-.115-1.78-1.23-2.501-2.64-2.501-1.497 0-2.532.783-2.835 2.501z"/><path d="M10.773 13.5c0 2.26-1.43 3.5-3.84 3.5H3V7h3.56c2.11 0 3.43 1.043 3.43 2.842 0 .98-.43 1.838-1.19 2.332.99.41 1.573 1.36 1.573 2.326zM5 9v1.995h1.305c.705 0 1.195-.368 1.195-1.003C7.5 9.367 7.01 9 6.305 9H5zm2.695 4.5c0-.668-.51-1.095-1.26-1.095H5V15h1.435c.75 0 1.26-.428 1.26-1z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // NAV SCROLL
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // MOBILE MENU
+    const navToggle = document.getElementById('navToggle');
+    const navMobile = document.getElementById('navMobile');
+    navToggle.addEventListener('click', () => navMobile.classList.toggle('open'));
+    navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navMobile.classList.remove('open')));
+
+    // SCROLL REVEAL
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    // COUNT UP
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+    const countObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const target = parseInt(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        const steps = 110; let cur = 0;
+        const timer = setInterval(() => {
+          cur++;
+          el.textContent = Math.round(easeOut(cur / steps) * target) + suffix;
+          if (cur >= steps) { el.textContent = target + suffix; clearInterval(timer); }
+        }, 16);
+        countObs.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.stat-value[data-target]').forEach(el => countObs.observe(el));
+
+    // PROGRESS BARS
+    const progressObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.progress-fill').forEach(b => b.classList.add('go'));
+          progressObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    const whyVisual = document.getElementById('whyVisual');
+    if (whyVisual) progressObs.observe(whyVisual);
+
+    // FAQ ACCORDION
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const ans = item.querySelector('.faq-a');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(o => {
+          o.classList.remove('open'); o.querySelector('.faq-a').classList.remove('open');
+        });
+        if (!isOpen) { item.classList.add('open'); ans.classList.add('open'); }
+      });
+    });
+
+    // CARD TILT
+    document.querySelectorAll('.process-step, .service-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `translateY(-6px) perspective(700px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+  </script>
+</body>
+</html>
