@@ -3,8 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SiteSnap — Strony Internetowe w 7 Dni</title>
-  <meta name="description" content="SiteSnap buduje nowoczesne strony internetowe szybko i profesjonalnie. Landing page, strony wizytówki, sklepy online. Realizacja od 7 dni.">
+  <title>SiteSnap — Nowoczesne Strony Internetowe na Zamówienie | Realizacja 7 Dni</title>
+  <meta name="description" content="SiteSnap tworzy profesjonalne strony internetowe pisane ręcznie w HTML/CSS/JS — bez szablonów, bez WordPressa. Błyskawiczne ładowanie, unikalny design, realizacja od 7 dni. Bezpłatna wycena.">
+  <meta name="keywords" content="strony internetowe, tworzenie stron www, strona internetowa dla firmy, landing page, wizytówka internetowa, szybka strona www, strona bez wordpressa, tanie strony internetowe, projektowanie stron">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="SiteSnap — Nowoczesne Strony Internetowe na Zamówienie">
+  <meta property="og:description" content="Profesjonalne strony internetowe pisane od zera — szybkie, unikalne, gotowe w 7 dni. Żadnych szablonów, żadnego WordPressa.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pl_PL">
+  <link rel="canonical" href="https://sitesnap.pl/">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R7QVRVMTRH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-R7QVRVMTRH');
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -471,11 +487,11 @@
     .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--sp-lg); align-items: start; }
     .pricing-grid-2 { grid-template-columns: repeat(2,1fr); max-width: 800px; margin: 0 auto; }
     .pricing-card {
-      background: var(--c-card); border: 1px solid var(--c-border);
+      background: rgba(0,24,82,.75); border: 1px solid var(--c-border);
       border-radius: var(--r-xl); padding: var(--sp-xl) var(--sp-lg); transition: var(--t);
     }
     .pricing-card.featured {
-      background: linear-gradient(145deg, rgba(0,44,152,.38), rgba(0,71,212,.12));
+      background: linear-gradient(145deg, rgba(0,44,152,.82), rgba(0,71,212,.55));
       border-color: rgba(101,219,255,.38);
       box-shadow: 0 0 44px rgba(101,219,255,.1), 0 20px 60px rgba(0,0,0,.28);
       position: relative;
@@ -658,14 +674,17 @@
     @media (max-width: 700px) { .addons-grid { grid-template-columns: 1fr; } }
 
     .addon-card {
-      background: rgba(0,44,152,.1);
+      background: rgba(0,24,82,.75);
       border: 1px solid var(--c-border);
       border-radius: var(--r-lg);
       padding: var(--sp-lg);
       display: flex; flex-direction: column; gap: var(--sp-sm);
       transition: var(--t);
     }
-    .addon-card:hover { border-color: rgba(101,219,255,.3); background: rgba(0,44,152,.2); }
+    .addon-card:hover { border-color: rgba(101,219,255,.3); background: rgba(0,24,82,.88); }
+    .addon-more { margin-top: 2rem; text-align: center; color: var(--c-muted); font-size: .95rem; }
+    .addon-more a { color: var(--c-accent); text-decoration: none; }
+    .addon-more a:hover { text-decoration: underline; }
     .addon-icon {
       width: 40px; height: 40px; border-radius: var(--r-md);
       background: rgba(101,219,255,.07); border: 1px solid rgba(101,219,255,.18);
@@ -677,7 +696,77 @@
     .addon-price {
       font-family: var(--f-head); font-size: var(--t-xl); font-weight: 800; color: var(--c-action);
     }
+
+    /* ─── DLACZEGO MY ───────────────────────────────────── */
+    .dlaczego-list {
+      list-style: none;
+      max-width: 720px;
+      margin: var(--sp-xl) auto 0;
+      display: flex; flex-direction: column; gap: var(--sp-lg);
+    }
+    .dlaczego-list li {
+      display: flex; gap: var(--sp-md); align-items: baseline;
+      font-size: var(--t-base); color: var(--c-muted); line-height: 1.7;
+    }
+    .dlaczego-marker {
+      color: var(--c-action); font-weight: 700; flex-shrink: 0; font-size: var(--t-lg);
+    }
+    .dlaczego-list strong { color: var(--c-text); }
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://sitesnap.pl/#business",
+        "name": "SiteSnap",
+        "description": "Tworzymy profesjonalne strony internetowe pisane ręcznie w HTML, CSS i JS — bez szablonów, bez WordPressa. Unikalny design, błyskawiczne ładowanie, realizacja od 7 dni.",
+        "url": "https://sitesnap.pl",
+        "email": "kontakt@sitesnap.pl",
+        "priceRange": "$$",
+        "currenciesAccepted": "PLN",
+        "paymentAccepted": "Przelew bankowy",
+        "areaServed": {
+          "@type": "Country",
+          "name": "Polska"
+        },
+        "sameAs": []
+      },
+      {
+        "@type": "Service",
+        "@id": "https://sitesnap.pl/#service-landing",
+        "name": "Landing Page",
+        "description": "Jednostronicowa strona sprzedażowa lub wizytówkowa. Pisana ręcznie w HTML/CSS/JS — bez szablonów. Wysoki PageSpeed, unikalny design, realizacja w 48h.",
+        "provider": { "@id": "https://sitesnap.pl/#business" },
+        "serviceType": "Tworzenie stron internetowych",
+        "offers": {
+          "@type": "Offer",
+          "price": "799",
+          "priceCurrency": "PLN"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://sitesnap.pl/#service-business",
+        "name": "Strona Firmowa",
+        "description": "Wielostroniowa strona internetowa dla firmy z formularzem kontaktowym, mapą dojazdu i integracją z Google. Realizacja w 7 dni.",
+        "provider": { "@id": "https://sitesnap.pl/#business" },
+        "serviceType": "Tworzenie stron internetowych",
+        "offers": {
+          "@type": "Offer",
+          "price": "1499",
+          "priceCurrency": "PLN"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Calendly -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
 <body>
 
@@ -691,10 +780,12 @@
         <ul class="nav-links">
           <li><a href="#services">Usługi</a></li>
           <li><a href="#process">Jak działamy</a></li>
+          <li><a href="#dlaczego">Dlaczego my?</a></li>
           <li><a href="#realizacje">Realizacje</a></li>
           <li><a href="#pricing">Cennik</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
+        <button onclick="Calendly.initPopupWidget({url:'https://calendly.com/biskupskiantoni/30min'});return false;" class="btn btn-outline nav-cta" style="padding:10px 22px;font-size:var(--t-sm);cursor:pointer">Umów spotkanie</button>
         <a href="#contact" class="btn btn-primary nav-cta" style="padding:10px 22px;font-size:var(--t-sm)">Bezpłatna wycena</a>
         <button class="nav-toggle" id="navToggle" aria-label="Otwórz menu">
           <span></span><span></span><span></span>
@@ -703,9 +794,11 @@
       <div class="nav-mobile" id="navMobile">
         <a href="#services">Usługi</a>
         <a href="#process">Jak działamy</a>
+        <a href="#dlaczego">Dlaczego my?</a>
         <a href="#realizacje">Realizacje</a>
         <a href="#pricing">Cennik</a>
         <a href="#faq">FAQ</a>
+        <button onclick="Calendly.initPopupWidget({url:'https://calendly.com/biskupskiantoni/30min'});return false;" class="btn btn-outline" style="width:100%;justify-content:center;cursor:pointer">Umów spotkanie</button>
         <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">Bezpłatna wycena</a>
       </div>
     </div>
@@ -989,6 +1082,35 @@
   </section>
 
 
+  <!-- DLACZEGO MY -->
+  <section class="section section-alt" id="dlaczego">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Dlaczego my?</div>
+        <h2 class="section-title">AI + ludzka wizja.<br>Strona, której nie skopiujesz.</h2>
+        <p class="section-desc">Łączymy możliwości sztucznej inteligencji z prawdziwym designem i doświadczeniem. Efekt? Strona niepowtarzalna — i gotowa szybciej niż myślisz.</p>
+      </div>
+      <ul class="dlaczego-list reveal">
+        <li>
+          <span class="dlaczego-marker">—</span>
+          <div><strong>AI przyspiesza, człowiek decyduje.</strong> Wykorzystujemy AI do kodowania, ale każda decyzja designerska należy do nas. Żaden bot nie zastąpi wyczucia estetyki i znajomości Twojej branży.</div>
+        </li>
+        <li>
+          <span class="dlaczego-marker">—</span>
+          <div><strong>Unikalny design, nie szablon.</strong> Każda strona zaprojektowana od zera pod Twój biznes — kolorystyka, typografia, układ. Żadnych gotowych motywów, które widać z kilometra.</div>
+        </li>
+        <li>
+          <span class="dlaczego-marker">—</span>
+          <div><strong>Czysty kod = błyskawiczne ładowanie.</strong> WordPress ładuje dziesiątki pluginów i megabajty CSS, których nie potrzebujesz. Nasze strony to czysty HTML/CSS/JS — PageSpeed 95+, a Google to nagradza.</div>
+        </li>
+        <li>
+          <span class="dlaczego-marker">—</span>
+          <div><strong>Gotowe w dni, nie tygodnie.</strong> AI eliminuje powtarzalną robotę — efekt jest szybciej na ekranie, a Ty wcześniej zaczynasz przyciągać klientów. Bez miesięcznych czekań jak u agencji.</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
   <!-- CASE STUDIES -->
   <section class="section" id="realizacje">
     <div class="container">
@@ -1018,7 +1140,7 @@
                 <div class="cs-stat-label">realizacja</div>
               </div>
               <div>
-                <div class="cs-stat-val">80</div>
+                <div class="cs-stat-val">94</div>
                 <div class="cs-stat-label">PageSpeed</div>
               </div>
             </div>
@@ -1031,8 +1153,42 @@
           </div>
         </div>
 
-        <!-- Kancelaria Iustitia -->
+        <!-- LakeEscape -->
         <div class="cs-card reveal" style="transition-delay:.1s">
+          <div class="cs-mockup">
+            <a href="https://antszkol.github.io/loodki/" target="_blank" rel="noopener">
+              <img src="/screenshots/LakeEscape.png" alt="LakeEscape — wypożyczalnia łódek" class="cs-screenshot">
+            </a>
+          </div>
+          <div class="cs-body">
+            <div class="cs-industry">⛵ Turystyka & Sport</div>
+            <div class="cs-title">LakeEscape</div>
+            <p class="cs-quote">„Odpłyń od codzienności."</p>
+            <div class="cs-stats">
+              <div>
+                <div class="cs-stat-val">HTML</div>
+                <div class="cs-stat-label">technologia</div>
+              </div>
+              <div>
+                <div class="cs-stat-val">72h</div>
+                <div class="cs-stat-label">realizacja</div>
+              </div>
+              <div>
+                <div class="cs-stat-val">96</div>
+                <div class="cs-stat-label">PageSpeed</div>
+              </div>
+            </div>
+            <div class="cs-tags">
+              <span class="cs-tag">HTML / CSS / JS</span>
+              <span class="cs-tag">Rezerwacje online</span>
+              <span class="cs-tag">Google Sheets</span>
+              <span class="cs-tag">Mobile-first</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kancelaria Iustitia -->
+        <div class="cs-card reveal" style="transition-delay:.2s">
           <div class="cs-mockup">
             <img src="/screenshots/Kancelaria.png" alt="Kancelaria Iustitia — strona internetowa" class="cs-screenshot">
           </div>
@@ -1050,7 +1206,7 @@
                 <div class="cs-stat-label">realizacja</div>
               </div>
               <div>
-                <div class="cs-stat-val">81</div>
+                <div class="cs-stat-val">93</div>
                 <div class="cs-stat-label">PageSpeed</div>
               </div>
             </div>
@@ -1068,7 +1224,8 @@
   </section>
 
   <!-- PRICING -->
-  <section class="section" id="pricing">
+  <section class="section" id="pricing" style="position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,71,212,.28) 1px,transparent 1px),linear-gradient(90deg,rgba(0,71,212,.28) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 100% 100% at 50% 50%,black 40%,transparent 100%);pointer-events:none;"></div>
     <div class="container">
       <div class="section-header reveal">
         <div class="section-label">Cennik</div>
@@ -1133,15 +1290,9 @@
           <p class="addon-desc">Interaktywna mapa Google dojazdu do Twojej firmy — klient wie dokładnie, gdzie jesteś.</p>
         </div>
 
-        <div class="addon-card reveal" style="transition-delay:.3s">
-          <div class="addon-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
-          </div>
-          <div class="addon-name">i wiele innych</div>
-          <p class="addon-desc">Masz pomysł na coś więcej? Zapytaj — chętnie dopasujemy rozwiązanie do Twoich potrzeb.</p>
-        </div>
 
       </div>
+      <p class="addon-more reveal">…i wiele innych — masz pomysł na coś więcej? <a href="#contact">Zapytaj</a>, chętnie dopasujemy rozwiązanie do Twoich potrzeb.</p>
     </div>
   </section>
 
@@ -1189,10 +1340,11 @@
         <h2 class="cta-title">Gotowy na nową stronę?<br><span class="text-action">Zacznijmy.</span></h2>
         <p class="cta-desc">Bezpłatna wycena w 24 godziny. Termin realizacji z góry. Bez ryzyka.</p>
         <div class="cta-actions">
-          <a href="mailto:kontakt@sitesnap.pl" class="btn btn-primary" style="font-size:var(--t-lg);padding:18px 44px">
-            Napisz do nas →
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdITvIZW2Ljhofji3u2dPK_GFQjhgq_UjCSloTiFT7TZ2Nj-A/viewform?usp=header" target="_blank" rel="noopener" class="btn btn-primary" style="font-size:var(--t-lg);padding:18px 44px">
+            Wypełnij brief
           </a>
-          <a href="tel:+48000000000" class="btn btn-outline">Zadzwoń teraz</a>
+          <a href="mailto:kontakt@sitesnap.pl" class="btn btn-primary" style="font-size:var(--t-lg);padding:18px 44px">Napisz do nas</a>
+          <a href="tel:+48000000000" class="btn btn-primary" style="font-size:var(--t-lg);padding:18px 44px">Zadzwoń teraz</a>
         </div>
         <p class="cta-note">✓ Bezpłatna wycena &nbsp;·&nbsp; ✓ Gwarantowany termin &nbsp;·&nbsp; ✓ Stała cena</p>
       </div>
